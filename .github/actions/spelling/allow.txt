@@ -118,7 +118,7 @@ Khanh
 Knopf
 Kubeflow
 Kudrow
-Langraph
+LangGraph
 LCEL
 LLMs
 LOOKBACK
