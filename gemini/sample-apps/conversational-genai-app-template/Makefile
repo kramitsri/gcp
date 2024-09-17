@@ -16,4 +16,5 @@ load_test:
 lint:
 	poetry run codespell
 	poetry run ruff .
-	poetry run mypy app tests
+	poetry run mypy .
+	poetry run black .

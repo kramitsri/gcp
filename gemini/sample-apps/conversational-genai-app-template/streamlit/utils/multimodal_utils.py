@@ -19,7 +19,7 @@ from urllib.parse import quote
 from google.cloud import storage
 
 HELP_MESSAGE_MULTIMODALITY = (
-    "For Gemini models to access the URIs you provide, store them in " \
+    "For Gemini models to access the URIs you provide, store them in "
     "Google Cloud Storage buckets within the same project used by Gemini."
 )
 
@@ -109,9 +109,7 @@ def get_gcs_blob_mime_type(gcs_uri: str) -> Optional[str]:
 
 
 def get_parts_from_files(
-    upload_gcs_checkbox: bool,
-    uploaded_files: List[Any],
-    gcs_uris: str
+    upload_gcs_checkbox: bool, uploaded_files: List[Any], gcs_uris: str
 ) -> List[Dict[str, Any]]:
     parts = []
     # read from local directly
@@ -151,7 +149,7 @@ def upload_bytes_to_gcs(
     bucket_name: str,
     blob_name: str,
     file_bytes: bytes,
-    content_type: Optional[str] = None
+    content_type: Optional[str] = None,
 ) -> str:
     """Uploads a bytes object to Google Cloud Storage and returns the GCS URI.
 
