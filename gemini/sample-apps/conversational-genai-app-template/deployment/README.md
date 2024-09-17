@@ -1,9 +1,11 @@
-## Deployment README.md
+# Deployment README.md
+
 This folder contains the infrastructure-as-code and CI/CD pipeline configurations for deploying a conversational Generative AI application on Google Cloud.
 
 The application leverages [**Terraform**](http://terraform.io) to define and provision the underlying infrastructure, while [**Cloud Build**](https://cloud.google.com/build/) orchestrates the continuous integration and continuous deployment (CI/CD) pipeline.
 
-### Deployment Workflow
+## Deployment Workflow
+
 ![Deployment Workflow](../images/deployment_workflow.png)
 
 **Description:**
@@ -24,8 +26,7 @@ The application leverages [**Terraform**](http://terraform.io) to define and pro
    - Deploys to production environment
 
 
-
-### Setup
+## Setup
 
 **Prerequisites:**
 
@@ -40,7 +41,7 @@ The application leverages [**Terraform**](http://terraform.io) to define and pro
    gcloud services enable serviceusage.googleapis.com cloudresourcemanager.googleapis.com cloudbuild.googleapis.com secretmanager.googleapis.com
    ```
 
-### Step-by-Step Guide
+## Step-by-Step Guide
 
 1. **Create a Git Repository using your favorite git provider (GitHub, GitLab, Bitbucket, etc.)**
 
@@ -82,7 +83,8 @@ Other optional variables include: telemetry and feedback BigQuery dataset IDs, l
 After completing these steps, your infrastructure will be set up and ready for deployment!
 
 
-### Dev Deployment
+## Dev Deployment
+
 For end-to-end testing of the application, including tracing and feedback sinking to BigQuery, without the need to trigger a CI/CD pipeline.
 
 After you edited the relative [`env.tfvars` file](../terraform/dev/vars/env.tfvars), follow the following instructions:
@@ -98,7 +100,7 @@ gcloud run deploy conversational-app-sample --source . --project $YOUR_DEV_PROJE
 ```
 
 
-**E2E Demo video**
+### E2E Demo video
 
 <a href="https://storage.googleapis.com/test-elia-us-central1/template%20deployment%20demo.mp4">
   <img src="../images/preview_video.png" alt="Watch the video" width="300"/>
