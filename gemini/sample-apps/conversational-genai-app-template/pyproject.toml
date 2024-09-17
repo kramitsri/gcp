@@ -68,26 +68,21 @@ select = [
 line-length = 105
 
 [tool.mypy]
-# Ensure functions have type annotations
+disallow_untyped_calls = true
 disallow_untyped_defs = true
-
-# Allow returning Any from functions with no return type specified
-allow_untyped_calls = true
-
-# Don't require type annotations for self or cls in methods
-disallow_untyped_decorators = false
-
-# Ignore missing imports
+disallow_incomplete_defs = true
+no_implicit_optional = true
+check_untyped_defs = true
+disallow_subclassing_any = true
+warn_incomplete_stub = true
+warn_redundant_casts = true
+warn_unused_ignores = true
+warn_unreachable = true
+follow_imports = "silent"
 ignore_missing_imports = true
+explicit_package_bases = true
+disable_error_code = ["misc", "no-untyped-call", "no-any-return"]
 
-# Don't complain about missing return statements
-warn_no_return = false
-
-# Show error codes in error messages
-show_error_codes = true
-
-# Ensure all functions have return type annotations
-warn_return_any = true
 
 
 [tool.codespell]

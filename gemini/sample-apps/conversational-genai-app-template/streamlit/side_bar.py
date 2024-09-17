@@ -14,6 +14,7 @@
 
 import os
 import uuid
+from typing import Any
 
 from utils.multimodal_utils import (
     HELP_GCS_CHECKBOX,
@@ -28,10 +29,10 @@ DEFAULT_BASE_URL = "http://localhost:8000/"
 
 
 class SideBar:
-    def __init__(self, st) -> None:
+    def __init__(self, st: Any) -> None:
         self.st = st
 
-    def init_side_bar(self):
+    def init_side_bar(self) -> None:
         with self.st.sidebar:
             self.url_input_field = self.st.text_input(
                 label="Service URL",

@@ -12,10 +12,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+from typing import Any
+
 
 class MessageEditing:
     @staticmethod
-    def edit_message(st, button_idx, message_type):
+    def edit_message(st: Any, button_idx: int, message_type: str) -> None:
         button_id = f"edit_box_{button_idx}"
         if message_type == "human":
             messages = st.session_state.user_chats[st.session_state["session_id"]][
@@ -31,7 +33,7 @@ class MessageEditing:
             ]["content"] = st.session_state[button_id]
 
     @staticmethod
-    def refresh_message(st, button_idx, content):
+    def refresh_message(st: Any, button_idx: int, content: str) -> None:
         messages = st.session_state.user_chats[st.session_state["session_id"]][
             "messages"
         ]
@@ -41,7 +43,7 @@ class MessageEditing:
         st.session_state.modified_prompt = content
 
     @staticmethod
-    def delete_message(st, button_idx):
+    def delete_message(st: Any, button_idx: int) -> None:
         messages = st.session_state.user_chats[st.session_state["session_id"]][
             "messages"
         ]

@@ -16,7 +16,7 @@ import json
 import os
 import time
 
-from locust import HttpUser, between, task  # type: ignore[import-not-found]
+from locust import HttpUser, between, task
 
 
 class ChatStreamUser(HttpUser):

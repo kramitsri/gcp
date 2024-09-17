@@ -14,13 +14,14 @@
 
 import os
 from pathlib import Path
+from typing import Any, Dict, List, Union
 
 import yaml
 
 SAVED_CHAT_PATH = str(os.getcwd()) + "/.saved_chats"
 
 
-def preprocess_text(text):
+def preprocess_text(text: str) -> str:
     if text[0] == "\n":
         text = text[1:]
     if text[-1] == "\n":
@@ -28,7 +29,9 @@ def preprocess_text(text):
     return text
 
 
-def fix_messages(messages):
+def fix_messages(
+    messages: List[Dict[str, Union[str, List[Dict[str, str]]]]]
+) -> List[Dict[str, Union[str, List[Dict[str, str]]]]]:
     for message in messages:
         if isinstance(message["content"], list):
             for part in message["content"]:
@@ -39,7 +42,7 @@ def fix_messages(messages):
     return messages
 
 
-def save_chat(st):
+def save_chat(st: Any) -> None:
     Path(SAVED_CHAT_PATH).mkdir(parents=True, exist_ok=True)
     session_id = st.session_state["session_id"]
     session = st.session_state.user_chats[session_id]

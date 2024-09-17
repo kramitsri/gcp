@@ -14,6 +14,7 @@
 
 import os
 from datetime import datetime
+from typing import Dict
 
 import yaml
 from langchain_core.chat_history import BaseChatMessageHistory
@@ -36,11 +37,11 @@ class LocalChatMessageHistory(BaseChatMessageHistory):
 
         os.makedirs(self.user_dir, exist_ok=True)
 
-    def get_session(self, session_id):
+    def get_session(self, session_id: str) -> None:
         self.session_id = session_id
         self.session_file = os.path.join(self.user_dir, f"{session_id}.yaml")
 
-    def get_all_conversations(self):
+    def get_all_conversations(self) -> Dict[str, Dict]:
         conversations = {}
         for filename in os.listdir(self.user_dir):
             if filename.endswith(".yaml"):
@@ -65,7 +66,7 @@ class LocalChatMessageHistory(BaseChatMessageHistory):
             sorted(conversations.items(), key=lambda x: x[1].get("update_time", ""))
         )
 
-    def upsert_session(self, session) -> None:
+    def upsert_session(self, session: Dict) -> None:
         session["update_time"] = datetime.now().isoformat()
         with open(self.session_file, "w") as f:
             yaml.dump(
@@ -76,7 +77,7 @@ class LocalChatMessageHistory(BaseChatMessageHistory):
                 encoding="utf-8",
             )
 
-    def set_title(self, session) -> None:
+    def set_title(self, session: Dict) -> None:
         """
         Set the title for the given session.
 

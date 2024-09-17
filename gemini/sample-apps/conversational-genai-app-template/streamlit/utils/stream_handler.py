@@ -13,7 +13,7 @@
 # limitations under the License.
 
 import json
-from typing import Any, Dict, Generator
+from typing import Any, Dict, Generator, List, Optional
 from urllib.parse import urljoin
 
 import google.auth
@@ -39,7 +39,7 @@ class Client:
         if self.authenticate_request:
             self.id_token = self.get_id_token(self.url)
 
-    def get_id_token(self, url: str):
+    def get_id_token(self, url: str) -> str:
         """
         Retrieves an ID token, attempting to use a service-to-service method first and
         otherwise using user default credentials.
@@ -57,7 +57,7 @@ class Client:
             token = self.creds.id_token
         return token
 
-    def log_feedback(self, feedback_dict, run_id):
+    def log_feedback(self, feedback_dict: Dict[str, Any], run_id: str) -> None:
         score = feedback_dict["score"]
         if score == "😞":
             score = 0.0
@@ -105,7 +105,7 @@ class Client:
 class StreamHandler:
     """Handles streaming updates to a Streamlit interface."""
 
-    def __init__(self, st, initial_text=""):
+    def __init__(self, st: Any, initial_text: str = "") -> None:
         """Initialize the StreamHandler with Streamlit context and initial text."""
         self.st = st
         self.tool_expander = st.expander("Tool Calls:", expanded=False)
@@ -127,18 +127,18 @@ class StreamHandler:
 class EventProcessor:
     """Processes events from the stream and updates the UI accordingly."""
 
-    def __init__(self, st, client, stream_handler):
+    def __init__(self, st: Any, client: Client, stream_handler: StreamHandler) -> None:
         """Initialize the EventProcessor with Streamlit context, client, and stream handler."""
         self.st = st
         self.client = client
         self.stream_handler = stream_handler
         self.final_content = ""
-        self.tool_calls = []
-        self.tool_calls_outputs = []
-        self.additional_kwargs = {}
-        self.current_run_id = None
+        self.tool_calls: List[Dict[str, Any]] = []
+        self.tool_calls_outputs: List[Dict[str, Any]] = []
+        self.additional_kwargs: Dict[str, Any] = {}
+        self.current_run_id: Optional[str] = None
 
-    def process_events(self):
+    def process_events(self) -> None:
         """Process events from the stream, handling each event type appropriately."""
         messages = self.st.session_state.user_chats[
             self.st.session_state["session_id"]
@@ -162,7 +162,7 @@ class EventProcessor:
         }
 
         for event in stream:
-            event_type = event.get("event")
+            event_type = str(event.get("event"))
             handler = event_handlers.get(event_type)
             if handler:
                 handler(event)
@@ -232,7 +232,7 @@ class EventProcessor:
         self.st.session_state.run_id = self.current_run_id
 
 
-def get_chain_response(st, client, stream_handler):
+def get_chain_response(st: Any, client: Client, stream_handler: StreamHandler) -> None:
     """Process the chain response update the Streamlit UI.
 
     This function initiates the event processing for a chain of operations,
@@ -240,7 +240,7 @@ def get_chain_response(st, client, stream_handler):
     It creates an EventProcessor instance and starts the event processing loop.
 
     Args:
-        st (streamlit): The Streamlit app instance, used for accessing session state
+        st (Any): The Streamlit app instance, used for accessing session state
                         and updating the UI.
         client (Client): An instance of the Client class used to stream events
                          from the server.

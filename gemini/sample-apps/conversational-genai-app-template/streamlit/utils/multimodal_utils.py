@@ -13,6 +13,7 @@
 # limitations under the License.
 
 import base64
+from typing import Any, Dict, List, Optional, Union
 from urllib.parse import quote
 
 from google.cloud import storage
@@ -28,7 +29,7 @@ HELP_GCS_CHECKBOX = (
 )
 
 
-def format_content(content):
+def format_content(content: Union[str, List[Dict[str, Any]]]) -> str:
     if isinstance(content, str):
         return content
     if len(content) == 1 and content[0]["type"] == "text":
@@ -82,7 +83,7 @@ def format_content(content):
         return markdown
 
 
-def get_gcs_blob_mime_type(gcs_uri):
+def get_gcs_blob_mime_type(gcs_uri: str) -> Optional[str]:
     """Fetches the MIME type (content type) of a Google Cloud Storage blob.
 
     Args:
@@ -107,7 +108,11 @@ def get_gcs_blob_mime_type(gcs_uri):
         return None  # Indicate failure
 
 
-def get_parts_from_files(upload_gcs_checkbox, uploaded_files, gcs_uris):
+def get_parts_from_files(
+    upload_gcs_checkbox: bool,
+    uploaded_files: List[Any],
+    gcs_uris: str
+) -> List[Dict[str, Any]]:
     parts = []
     # read from local directly
     if not upload_gcs_checkbox:
@@ -142,7 +147,12 @@ def get_parts_from_files(upload_gcs_checkbox, uploaded_files, gcs_uris):
     return parts
 
 
-def upload_bytes_to_gcs(bucket_name, blob_name, file_bytes, content_type=None):
+def upload_bytes_to_gcs(
+    bucket_name: str,
+    blob_name: str,
+    file_bytes: bytes,
+    content_type: Optional[str] = None
+) -> str:
     """Uploads a bytes object to Google Cloud Storage and returns the GCS URI.
 
     Args:
@@ -167,7 +177,7 @@ def upload_bytes_to_gcs(bucket_name, blob_name, file_bytes, content_type=None):
     return gcs_uri
 
 
-def gs_uri_to_https_url(gs_uri):
+def gs_uri_to_https_url(gs_uri: str) -> str:
     """Converts a GS URI to an HTTPS URL without authentication.
 
     Args:
@@ -191,7 +201,7 @@ def gs_uri_to_https_url(gs_uri):
     return https_url
 
 
-def upload_files_to_gcs(st, bucket_name, files_to_upload):
+def upload_files_to_gcs(st: Any, bucket_name: str, files_to_upload: List[Any]) -> None:
     bucket_name = bucket_name.replace("gs://", "")
     uploaded_uris = []
     for file in files_to_upload:
