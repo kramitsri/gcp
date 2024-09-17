@@ -1,7 +1,8 @@
 # 🚀 Conversational Gen AI App Template! 🚀
->**Focus on Innovation, not Infrastructure**
 
-This folder is a **starter-pack** to building a Generative AI application on Google Cloud. 
+> **Focus on Innovation, not Infrastructure**
+
+This folder is a **starter-pack** to building a Generative AI application on Google Cloud.
 
 It is meant to be a template repository to build your own Gen AI application.
 
@@ -18,18 +19,18 @@ This template covers all aspects of Generative AI app development, from prototyp
 <details>
 <summary><b>A prod-ready FastAPI server</b></summary>
 
-| Description                                                                                                                                          | Visualization |
-|------------------------------------------------------------------------------------------------------------------------------------------------------|---------------|
-| The template includes a production-ready FastAPI server with real-time chat interface, event streaming, auto-generated docs. Designed for scalability and easy integration with monitoring tools. | ![FastAPI docs](images/fastapi_docs.png) 
-![FastAPI docs](images/code.png) |
+| Description                                                                                                                                                                                       | Visualization                            |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------- |
+| The template includes a production-ready FastAPI server with real-time chat interface, event streaming, auto-generated docs. Designed for scalability and easy integration with monitoring tools. | ![FastAPI docs](images/fastapi_docs.png) |
+| ![FastAPI docs](images/code.png)                                                                                                                                                                  |
 
 </details>
 
 <details>
 <summary><b>Ready-to-use AI patterns</b></summary>
 
-| Description                                                                                                                                          | Visualization |
-|------------------------------------------------------------------------------------------------------------------------------------------------------|---------------|
+| Description                                                                                                                                                                                                                                                                                                                                             | Visualization                                        |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------- |
 | Start with a variety of common patterns: this repository offers examples including a basic conversational chain, a production-ready RAG (Retrieval-Augmented Generation) chain developed with python, and a LangGraph agent implementation. Use them in the application by changing one line of code. See the [README](app/README.md) for more details. | ![patterns available](images/patterns_available.png) |
 
 </details>
@@ -37,39 +38,37 @@ This template covers all aspects of Generative AI app development, from prototyp
 <details>
 <summary><b>Integration with Vertex AI Evaluation and Experiments</b></summary>
 
-| Description | Visualization |
-|-------------|---------------|
+| Description                                                                                                                              | Visualization                                            |
+| ---------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------- |
 | The repository showcases how to evaluate Generative AI applications using tools like Vertex AI rapid eval SDK and Vertex AI Experiments. | ![Vertex AI Rapid Eval](images/vertex_ai_rapid_eval.png) |
 
 </details>
 
-
 <details>
 <summary><b>Leverage Google Cloud Native Tracing and Logging</b></summary>
 
-| Description | Visualization |
-|-------------|---------------|
+| Description                                                                                                         | Visualization                                  |
+| ------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------- |
 | Seamlessly integrate with OpenTelemetry, Cloud Trace, Cloud Logging and BigQuery for comprehensive data collection. | ![Tracing Preview](images/tracing_preview.png) |
 
 </details>
-
 
 <details>
 
 <summary><b>Monitor Responses from the application</b></summary>
 
-| Description | Visualization |
-|-------------|---------------|
+| Description                                                                                                                                                                                                                                        | Visualization                         |
+| -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------- |
 | Monitor your Generative AI Application's performance. We provide a Looker Studio [dashboard](https://lookerstudio.google.com/u/0/reporting/fa742264-4b4b-4c56-81e6-a667dd0f853f) to monitor application conversation statistics and user feedback. | ![Dashboard1](images/dashboard_1.png) |
-| We can also drill down to individual conversations and view the messages exchanged | ![Dashboard2](images/dashboard_2.png) |
+| We can also drill down to individual conversations and view the messages exchanged                                                                                                                                                                 | ![Dashboard2](images/dashboard_2.png) |
 
 </details>
 
 <details>
 <summary><b>CICD and Terraform </b></summary>
 
-| Description | Visualization |
-|-------------|---------------|
+| Description                                                                                                                                                                                                                                                                       | Visualization            |
+| --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------ |
 | Streamline your deployments with Cloud Build. Enhance reliability through automated testing. The starter pack includes implementation of unit, integration and load tests and a set of terraform resources for you to setup your own Google Cloud project in a matter of minutes. | ![cicd](images/cicd.png) |
 
 </details>
@@ -77,12 +76,11 @@ This template covers all aspects of Generative AI app development, from prototyp
 <details>
 <summary><b>A comprehensive UI Playground</b></summary>
 
-| Description | Visualization |
-|-------------|---------------|
+| Description                                                                                                                                                 | Visualization                                |
+| ----------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------- |
 | Experiment with your Generative AI Application in a feature-rich playground, including chat curation, user feedback collection, multimodal input, and more! | ![Streamlit View](images/streamlit_view.png) |
 
 </details>
-
 
 ## Getting Started
 
@@ -97,8 +95,8 @@ This template covers all aspects of Generative AI app development, from prototyp
 ```bash
 gsutil -m cp -r gs://genai-starter-pack-templates/genai-starter-pack-template .
 ```
-Use the downloaded folder as a starting point for your own Generative AI application.
 
+Use the downloaded folder as a starting point for your own Generative AI application.
 
 ### Installation
 
@@ -109,6 +107,7 @@ poetry install --with streamlit,jupyter
 ```
 
 ### Setup
+
 Set your default Google Cloud project and region:
 
 ```commandline
@@ -120,12 +119,12 @@ gcloud config set region $REGION
 
 ## Commands
 
-| Command | Description |
-|---------|-------------|
-| `make playground` | Start the backend and frontend for local playground execution |
-| `make test` | Run unit and integration tests |
-| `make load_test` | Execute load tests (see [tests/load_test/README.md](tests/load_test/README.md) for details) |
-| `poetry run jupyter` | Launch Jupyter notebook |
+| Command              | Description                                                                                 |
+| -------------------- | ------------------------------------------------------------------------------------------- |
+| `make playground`    | Start the backend and frontend for local playground execution                               |
+| `make test`          | Run unit and integration tests                                                              |
+| `make load_test`     | Execute load tests (see [tests/load_test/README.md](tests/load_test/README.md) for details) |
+| `poetry run jupyter` | Launch Jupyter notebook                                                                     |
 
 For full command options and usage, refer to the [Makefile](Makefile).
 
@@ -133,16 +132,16 @@ For full command options and usage, refer to the [Makefile](Makefile).
 
 1. **Prototype Your Chain:** Build your Generative AI Application using different methodologies and frameworks. Use Vertex AI Evaluation for assessing the performances of your application and relative chain of steps. **See [`notebooks/getting_started.ipynb`](notebooks/getting_started.ipynb) for a tutorial to get started building and evaluating your chain.**
 2. **Integrate into the App:** Import your chain into the app. Edit `app/chain.py` file to add your chain.
-3. **Playground Testing:** Explore your chain's functionality using the Streamlit playground. Take advantage of the comprehensive playground features, such as chat history management, user feedback mechanisms, support for various input types, and additional capabilities. You can run the playground locally with `make playground` command. 
+3. **Playground Testing:** Explore your chain's functionality using the Streamlit playground. Take advantage of the comprehensive playground features, such as chat history management, user feedback mechanisms, support for various input types, and additional capabilities. You can run the playground locally with `make playground` command.
 4. **Deploy with CI/CD:** Configure and trigger the CI/CD pipelines. Edit tests if needed. See the [deployment section](#deployment) below for more details.
 5. **Monitor in Production:** Track performance and gather insights using Cloud Logging, Tracing, and the Looker Studio dashboard. Use the gathered data to iterate on your Generative AI application.
-
 
 ## Deployment
 
 **Dev Environment**
 
 You can test deployment towards a Dev Environment using the following command:
+
 ```bash
 gcloud run deploy conversational-app-sample --source . --project YOUR_DEV_PROJECT_ID
 ```
@@ -150,13 +149,13 @@ gcloud run deploy conversational-app-sample --source . --project YOUR_DEV_PROJEC
 The repository includes a Terraform configuration for setup of the Dev Google Cloud project.
 See [deployment/README.md](deployment/README.md) for instructions.
 
-
 **Production Deployment with Terraform:**
 
 ![Deployment Workflow](images/deployment_workflow.png)
 
 **Quick Start:**
-1. Enable required APIs in the CI/CD project. 
+
+1. Enable required APIs in the CI/CD project.
    ```bash
    gcloud config set project YOUR_CI_CD_PROJECT_ID
    gcloud services enable serviceusage.googleapis.com cloudresourcemanager.googleapis.com cloudbuild.googleapis.com secretmanager.googleapis.com
@@ -171,10 +170,10 @@ cd deployment/terraform
 terraform init
 terraform apply --var-file vars/env.tfvars
 ```
+
 6. Perform a commit and push to the repository to see the CI/CD pipelines in action!
 
 For detailed deployment instructions, refer to [deployment/README.md](deployment/README.md).
-
 
 ## Contributing
 
@@ -186,4 +185,4 @@ Please use the [issues page](https://github.com/your-repo/genai-starter-pack/iss
 
 ## Disclaimer
 
-This repository is for demonstrative purposes only and is not an officially supported Google product. 
+This repository is for demonstrative purposes only and is not an officially supported Google product.

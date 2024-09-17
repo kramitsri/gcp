@@ -2,7 +2,7 @@
 
 This directory provides a comprehensive load testing framework for your Generative AI application, leveraging the power of [Locust](http://locust.io), a leading open-source load testing tool.
 
-##  Local Load Testing
+## Local Load Testing
 
 Follow these steps to execute load tests on your local machine:
 
@@ -39,21 +39,20 @@ This command initiates a 30-second load test, simulating 2 users spawning per se
 
 Comprehensive CSV and HTML reports detailing the load test performance will be generated and saved in the `tests/load_test/.results` directory.
 
-
 ## Remote Load Testing (Targeting Cloud Run)
 
 This framework also supports load testing against remote targets, such as a staging Cloud Run instance. This process is seamlessly integrated into the Continuous Delivery pipeline via Cloud Build, as defined in the [pipeline file](cicd/cd/staging.yaml).
 
 **Prerequisites:**
 
-* **Dependencies:** Ensure your environment has the same dependencies required for local testing.
-* **Cloud Run Invoker Role:** You'll need the `roles/run.invoker` role to invoke the Cloud Run service.
+- **Dependencies:** Ensure your environment has the same dependencies required for local testing.
+- **Cloud Run Invoker Role:** You'll need the `roles/run.invoker` role to invoke the Cloud Run service.
 
 **Steps:**
 
 **1. Obtain Cloud Run Service URL:**
 
-Navigate to the Cloud Run console, select your service, and copy the URL displayed at the top.  Set this URL as an environment variable:
+Navigate to the Cloud Run console, select your service, and copy the URL displayed at the top. Set this URL as an environment variable:
 
 ```bash
 export RUN_SERVICE_URL=https://your-cloud-run-service-url.run.app
@@ -78,4 +77,3 @@ poetry run locust -f tests/load_test/load_test.py \
 --csv=tests/load_test/.results/results \
 --html=tests/load_test/.results/report.html
 ```
-

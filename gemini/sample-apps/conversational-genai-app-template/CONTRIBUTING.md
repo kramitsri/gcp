@@ -18,7 +18,7 @@ Please refer to the [root repository CONTRIBUTING.md file](https://github.com/Go
 To ensure code quality, we utilize automated checks. Before submitting a pull request, please run the following commands locally:
 
 ```bash
-poetry install --with streamlit,jupyter,lint 
+poetry install --with streamlit,jupyter,lint
 ```
 
 This installs development dependencies, including linting tools.
@@ -28,6 +28,7 @@ Then, execute the following Makefile targets:
 ```bash
 make lint
 ```
+
 This command runs the following linters to check for code style, potential errors, and type hints:
 
 - **codespell**: Detects common spelling mistakes in code and documentation.
@@ -43,4 +44,4 @@ This command runs the test suite using pytest, covering both unit and integratio
 - **`poetry run pytest tests/unit`**: Executes unit tests located in the `tests/unit` directory.
 - **`poetry run pytest tests/integration`**: Executes integration tests located in the `tests/integration` directory.
 
-Your pull request will also be automatically checked by these tools using GitHub Actions. Ensuring your code passes these checks locally will help expedite the review process. 
+Your pull request will also be automatically checked by these tools using GitHub Actions. Ensuring your code passes these checks locally will help expedite the review process.
