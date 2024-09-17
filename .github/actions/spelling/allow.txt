@@ -118,6 +118,7 @@ Khanh
 Knopf
 Kubeflow
 Kudrow
+Langraph
 LCEL
 LLMs
 LOOKBACK
@@ -219,6 +220,7 @@ Testables
 Tetsuo
 Tianli
 Topolino
+Traceloop
 Trapp
 Tribbiani
 Tricyle
@@ -290,12 +292,14 @@ caxis
 cfbundle
 chatbots
 claude
+cicd
 clickable
 cmap
 codebase
 codebases
 codelab
 codelabs
+codespell
 colab
 coldline
 coloraxis
@@ -552,13 +556,16 @@ tencel
 termcolor
 tfhub
 tfidf
+tfvars
 tgz
 thelook
 tiktoken
 timechart
 titlebar
 toself
+toset
 tqdm
+traceloop
 tritan
 ubuntu
 unigram
