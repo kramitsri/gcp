@@ -10,7 +10,7 @@ This repository provides a template starter pack for building a Generative AI ap
 
 We provide a comprehensive set of resources to guide you through the entire development process, from prototype to production.
 
-This is a suggested approach, and **you can adapt it to fit your specific needs and preferences**. There are multiple ways to build GenAI applications on Google Cloud, and this template serves as a starting point and example. 
+This is a suggested approach, and **you can adapt it to fit your specific needs and preferences**. There are multiple ways to build Gen AI applications on Google Cloud, and this template serves as a starting point and example. 
 
 ## High-Level Architecture
 
