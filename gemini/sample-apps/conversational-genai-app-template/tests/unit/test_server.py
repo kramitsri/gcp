@@ -25,7 +25,8 @@ from langchain_core.messages import HumanMessage
 # Mock GCP credentials and project
 @pytest.fixture(autouse=True)
 def mock_gcp_credentials():
-    with patch("google.auth.default", return_value=(Mock(), "test-project")):
+    with patch("google.auth.default", return_value=(Mock(), "test-project")), \
+         patch("google.cloud.aiplatform.initializer.global_config.project", "test-project"):
         yield
 
 # Import app after mocking GCP credentials
