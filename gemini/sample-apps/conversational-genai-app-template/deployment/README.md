@@ -53,6 +53,7 @@ The application leverages [**Terraform**](http://terraform.io) to define and pro
    ![Alt text](../images/connection_cb.gif)
 
 3. **Configure Terraform Variables**
+
    - Edit [`deployment/terraform/vars/env.tfvars`](../terraform/vars/env.tfvars) with your Google Cloud settings.
 
    | Variable               | Description                                                     | Required |
@@ -67,6 +68,7 @@ The application leverages [**Terraform**](http://terraform.io) to define and pro
    Other optional variables include: telemetry and feedback BigQuery dataset IDs, log filters, sink names, service account names, bucket name suffixes, artifact registry repository name, and various role assignments for Cloud Run and CICD.
 
 4. **Deploy Infrastructure with Terraform**
+
    - Open a terminal and navigate to the Terraform directory:
 
    ```bash

@@ -54,7 +54,7 @@ variable "cloud_run_app_sa_name" {
 variable "cloud_run_app_roles" {
   description = "List of roles to assign to the Cloud Run app service account"
   type        = list(string)
-  default     = [
+  default = [
     "roles/aiplatform.user",
     "roles/discoveryengine.editor",
     "roles/logging.logWriter",

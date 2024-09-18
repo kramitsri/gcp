@@ -7,7 +7,7 @@ locals {
     "bigquery.googleapis.com",
     "cloudresourcemanager.googleapis.com",
   ]
-  
+
   shared_services = [
     "aiplatform.googleapis.com",
     "run.googleapis.com",
@@ -18,7 +18,7 @@ locals {
     "serviceusage.googleapis.com",
     "logging.googleapis.com"
   ]
-  
+
   projects = {
     prod    = var.prod_project_id
     staging = var.staging_project_id
@@ -27,15 +27,15 @@ locals {
 }
 
 resource "google_project_service" "cicd_services" {
-  count   = length(local.cicd_services)
-  project = var.cicd_runner_project_id
-  service = local.cicd_services[count.index]
+  count              = length(local.cicd_services)
+  project            = var.cicd_runner_project_id
+  service            = local.cicd_services[count.index]
   disable_on_destroy = false
 }
 
 resource "google_project_service" "shared_services" {
   for_each = {
-    for pair in setproduct(keys(local.projects), local.shared_services) : 
+    for pair in setproduct(keys(local.projects), local.shared_services) :
     "${pair[0]}_${replace(pair[1], ".", "_")}" => {
       project = local.projects[pair[0]]
       service = pair[1]
