@@ -1,12 +1,11 @@
 import json
 import logging
 import os
-from typing import Any
-from unittest.mock import patch, MagicMock
+from typing import Any, Generator
+from unittest.mock import MagicMock, patch
 
 import pytest
 from google.auth.credentials import Credentials
-from google.cloud import storage
 from httpx import AsyncClient
 from langchain_core.messages import HumanMessage
 
@@ -18,7 +17,7 @@ logger = logging.getLogger(__name__)
 
 
 @pytest.fixture(autouse=True)
-def mock_gcp_credentials():
+def mock_gcp_credentials() -> Generator[None, None, None]:
     with patch.dict(os.environ, {
         "GOOGLE_APPLICATION_CREDENTIALS": "/path/to/mock/credentials.json",
         "GCP_PROJECT_ID": "mock-project-id"
@@ -26,7 +25,7 @@ def mock_gcp_credentials():
         yield
 
 @pytest.fixture(autouse=True)
-def mock_google_auth_default():
+def mock_google_auth_default() -> Generator[None, None, None]:
     mock_credentials = MagicMock(spec=Credentials)
     mock_project = "mock-project-id"
     
@@ -66,8 +65,9 @@ def test_redirect_root_to_docs() -> None:
     """
     Test that the root endpoint (/) redirects to the Swagger UI documentation.
     """
-    from app.server import app
     from fastapi.testclient import TestClient
+
+    from app.server import app
     
     client = TestClient(app)
     response = client.get("/")

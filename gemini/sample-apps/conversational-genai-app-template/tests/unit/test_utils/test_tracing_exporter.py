@@ -12,6 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+from typing import Any, Generator
 from unittest.mock import Mock, patch
 
 import pytest
@@ -31,29 +32,35 @@ def mock_storage_client() -> Mock:
     return Mock(spec=storage.Client)
 
 @pytest.fixture
-def mock_credentials():
+def mock_credentials() -> Any:
     return Mock()
 
 @pytest.fixture
-def patch_auth(mock_credentials):
+def patch_auth(mock_credentials: Any) -> Generator[Mock, None, None]:
     with patch('google.auth.default', return_value=(mock_credentials, 'project')) as mock_auth:
         yield mock_auth
 
 @pytest.fixture
-def patch_clients(mock_logging_client, mock_storage_client):
+def patch_clients(mock_logging_client: Mock, mock_storage_client: Mock) -> Generator[None, None, None]:
     with patch('google.cloud.logging.Client', return_value=mock_logging_client):
         with patch('google.cloud.storage.Client', return_value=mock_storage_client):
             yield
 
 @pytest.fixture
-def exporter(mock_logging_client: Mock, mock_storage_client: Mock, patch_auth, mock_credentials, patch_clients) -> CloudTraceLoggingSpanExporter:
+def exporter(
+    mock_logging_client: Mock,
+    mock_storage_client: Mock,
+    patch_auth: Any,
+    mock_credentials: Any,
+    patch_clients: Any
+) -> CloudTraceLoggingSpanExporter:
     exporter = CloudTraceLoggingSpanExporter(
         project_id="test-project",
         logging_client=mock_logging_client,
         storage_client=mock_storage_client,
         bucket_name="test-bucket"
     )
-    exporter._ensure_bucket_exists = Mock()  # Mock this method
+    exporter._ensure_bucket_exists = Mock()  # type: ignore[method-assign]
     return exporter
 
 def test_init(exporter: CloudTraceLoggingSpanExporter) -> None:
@@ -80,7 +87,10 @@ def test_process_large_attributes_small_payload(
     assert result == span_dict
 
 @patch('json.dumps')
-def test_process_large_attributes_large_payload(mock_json_dumps: Mock, exporter: CloudTraceLoggingSpanExporter) -> None:
+def test_process_large_attributes_large_payload(
+    mock_json_dumps: Mock,
+    exporter: CloudTraceLoggingSpanExporter
+) -> None:
     mock_json_dumps.return_value = 'a' * (400 * 1024 + 1)  # Large payload
     span_dict = {
         "attributes": {
@@ -95,7 +105,10 @@ def test_process_large_attributes_large_payload(mock_json_dumps: Mock, exporter:
     assert "traceloop.association.properties.key2" in result["attributes"]
 
 @patch.object(CloudTraceLoggingSpanExporter, '_process_large_attributes')
-def test_export(mock_process_large_attributes: Mock, exporter: CloudTraceLoggingSpanExporter) -> None:
+def test_export(
+    mock_process_large_attributes: Mock, 
+    exporter: CloudTraceLoggingSpanExporter
+) -> None:
     mock_span = Mock(spec=ReadableSpan)
     mock_span.get_span_context.return_value.trace_id = 123
     mock_span.get_span_context.return_value.span_id = 456
