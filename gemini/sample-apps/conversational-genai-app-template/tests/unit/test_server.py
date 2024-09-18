@@ -41,6 +41,11 @@ def mock_gcp_credentials():
         yield
 
 @pytest.fixture(autouse=True)
+def mock_vertexai_init():
+    with patch("vertexai.init") as mock:
+        yield mock
+
+@pytest.fixture(autouse=True)
 def mock_google_auth_default():
     mock_credentials = MagicMock(spec=Credentials)
     mock_project = "mock-project-id"
