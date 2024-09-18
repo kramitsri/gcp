@@ -8,14 +8,14 @@ terraform {
 }
 
 resource "google_storage_bucket" "logs_data_bucket" {
-  name     = "${var.dev_project_id}-logs-data"
-  location = var.region
-  project  = var.dev_project_id
+  name                        = "${var.dev_project_id}-logs-data"
+  location                    = var.region
+  project                     = var.dev_project_id
   uniform_bucket_level_access = true
 
   lifecycle {
     prevent_destroy = true
-    ignore_changes = all
+    ignore_changes  = all
   }
 
   # Use this block to create the bucket only if it doesn't exist

@@ -1,3 +1,12 @@
+terraform {
+  required_providers {
+    google = {
+      source  = "hashicorp/google"
+      version = "~> 6.3.0"
+    }
+  }
+}
+
 locals {
   all_projects = [
     var.cicd_runner_project_id,

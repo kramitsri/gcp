@@ -95,7 +95,7 @@ variable "artifact_registry_repo_name" {
 variable "cloud_run_app_roles" {
   description = "List of roles to assign to the Cloud Run app service account"
   type        = list(string)
-  default     = [
+  default = [
     "roles/aiplatform.user",
     "roles/discoveryengine.editor",
     "roles/logging.logWriter",
@@ -107,7 +107,7 @@ variable "cloud_run_app_roles" {
 variable "cicd_roles" {
   description = "List of roles to assign to the CICD runner service account in the CICD project"
   type        = list(string)
-  default     = [
+  default = [
     "roles/storage.admin",
     "roles/run.invoker",
     "roles/aiplatform.user",
@@ -120,6 +120,6 @@ variable "cicd_roles" {
 
 variable "cicd_sa_deployment_required_roles" {
   description = "List of roles to assign to the CICD runner service account for the Staging and Prod projects."
-  type    = list(string)
-  default = ["roles/run.developer", "roles/iam.serviceAccountUser"]
+  type        = list(string)
+  default     = ["roles/run.developer", "roles/iam.serviceAccountUser"]
 }
