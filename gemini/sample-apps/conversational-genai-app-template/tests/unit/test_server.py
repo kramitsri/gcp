@@ -1,17 +1,3 @@
-# Copyright 2024 Google LLC
-#
-# Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-#
-#      http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
-
 import json
 import logging
 import os
@@ -19,7 +5,6 @@ from typing import Any
 from unittest.mock import patch, MagicMock
 
 import pytest
-from fastapi.testclient import TestClient
 from google.auth.credentials import Credentials
 from google.cloud import storage
 from httpx import AsyncClient
@@ -31,6 +16,7 @@ from app.utils.input_types import InputChat
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
+# Keep the fixtures and helper classes
 
 @pytest.fixture(autouse=True)
 def mock_gcp_credentials():
@@ -59,6 +45,11 @@ def mock_storage_client():
         yield mock_client
 
 @pytest.fixture(autouse=True)
+def mock_chat_vertex_ai():
+    with patch("langchain_google_vertexai.chat_models.ChatVertexAI") as mock:
+        yield mock
+
+@pytest.fixture
 def sample_input_chat() -> InputChat:
     """
     Fixture to create a sample input chat for testing.
@@ -68,33 +59,6 @@ def sample_input_chat() -> InputChat:
         session_id="test-session",
         messages=[HumanMessage(content="What is the meaning of life?")],
     )
-
-@pytest.fixture
-def mock_chain() -> Any:
-    """
-    Fixture to mock the chain object used in the application.
-    """
-    with patch("app.server.chain") as mock:
-        yield mock
-
-@pytest.fixture(autouse=True)
-def mock_chat_vertex_ai():
-    with patch("langchain_google_vertexai.chat_models.ChatVertexAI") as mock:
-        yield mock
-        
-from app.server import app
-
-# Create a test client
-client = TestClient(app)
-
-
-def test_redirect_root_to_docs() -> None:
-    """
-    Test that the root endpoint (/) redirects to the Swagger UI documentation.
-    """
-    response = client.get("/")
-    assert response.status_code == 200
-    assert "Swagger UI" in response.text
 
 class AsyncIterator:
     """
@@ -113,13 +77,28 @@ class AsyncIterator:
         except StopIteration:
             raise StopAsyncIteration
 
+# Now, let's modify the test functions
+
+def test_redirect_root_to_docs() -> None:
+    """
+    Test that the root endpoint (/) redirects to the Swagger UI documentation.
+    """
+    from app.server import app
+    from fastapi.testclient import TestClient
+    
+    client = TestClient(app)
+    response = client.get("/")
+    assert response.status_code == 200
+    assert "Swagger UI" in response.text
 
 @pytest.mark.asyncio
-async def test_stream_chat_events(mock_chain: Any, mock_storage_client: Any) -> None:
+async def test_stream_chat_events() -> None:
     """
     Test the stream_events endpoint to ensure it correctly handles
     streaming responses and generates the expected events.
     """
+    from app.server import app
+    
     input_data = {
         "input": {
             "user_id": "test-user",
@@ -138,26 +117,27 @@ async def test_stream_chat_events(mock_chain: Any, mock_storage_client: Any) -> 
         {"event": "on_chat_model_stream", "data": {"content": "Additional response"}},
     ]
 
-    mock_chain.astream_events.return_value = AsyncIterator(mock_events)
+    with patch("app.server.chain") as mock_chain:
+        mock_chain.astream_events.return_value = AsyncIterator(mock_events)
 
-    with patch("uuid.uuid4", return_value=mock_uuid), patch(
-        "app.server.Traceloop.set_association_properties"
-    ):
-        async with AsyncClient(app=app, base_url="http://test") as ac:
-            response = await ac.post("/stream_events", json=input_data)
+        with patch("uuid.uuid4", return_value=mock_uuid), patch(
+            "app.server.Traceloop.set_association_properties"
+        ):
+            async with AsyncClient(app=app, base_url="http://test") as ac:
+                response = await ac.post("/stream_events", json=input_data)
 
-    assert response.status_code == 200
-    assert response.headers["content-type"] == "text/event-stream; charset=utf-8"
+        assert response.status_code == 200
+        assert response.headers["content-type"] == "text/event-stream; charset=utf-8"
 
-    events = []
-    for event in response.iter_lines():
-        events.append(json.loads(event))
+        events = []
+        for event in response.iter_lines():
+            events.append(json.loads(event))
 
-    assert len(events) == 4
-    assert events[0]["event"] == "metadata"
-    assert events[0]["data"]["run_id"] == str(mock_uuid)
-    assert events[1]["event"] == "on_chat_model_stream"
-    assert events[1]["data"]["content"] == "Mocked response"
-    assert events[2]["event"] == "on_chat_model_stream"
-    assert events[2]["data"]["content"] == "Additional response"
-    assert events[3]["event"] == "end"
+        assert len(events) == 4
+        assert events[0]["event"] == "metadata"
+        assert events[0]["data"]["run_id"] == str(mock_uuid)
+        assert events[1]["event"] == "on_chat_model_stream"
+        assert events[1]["data"]["content"] == "Mocked response"
+        assert events[2]["event"] == "on_chat_model_stream"
+        assert events[2]["data"]["content"] == "Additional response"
+        assert events[3]["event"] == "end"
