@@ -69,6 +69,14 @@ def sample_input_chat() -> InputChat:
         messages=[HumanMessage(content="What is the meaning of life?")],
     )
 
+@pytest.fixture
+def mock_chain() -> Any:
+    """
+    Fixture to mock the chain object used in the application.
+    """
+    with patch("app.server.chain") as mock:
+        yield mock
+        
 from app.server import app
 
 # Create a test client
@@ -100,13 +108,6 @@ class AsyncIterator:
         except StopIteration:
             raise StopAsyncIteration
 
-@pytest.fixture
-def mock_chain() -> Any:
-    """
-    Fixture to mock the chain object used in the application.
-    """
-    with patch("app.server.chain") as mock:
-        yield mock
 
 @pytest.mark.asyncio
 async def test_stream_chat_events(mock_chain: Any, mock_storage_client: Any) -> None:

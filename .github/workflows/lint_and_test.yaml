@@ -1,6 +1,6 @@
 # Path: .github/workflows/ci/lint_and_test.yml
 
-name: Lint and Test
+name: Conversational Gen AI template - Lint and Test
 
 on:
   push:
