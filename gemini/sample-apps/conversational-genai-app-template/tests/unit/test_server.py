@@ -14,22 +14,17 @@
 
 import json
 import logging
+import os
 from typing import Any
-from unittest.mock import patch, Mock
+from unittest.mock import patch
 
 import pytest
 from fastapi.testclient import TestClient
+from google.auth.credentials import Credentials
+from google.cloud import storage
 from httpx import AsyncClient
 from langchain_core.messages import HumanMessage
 
-# Mock GCP credentials and project
-@pytest.fixture(autouse=True)
-def mock_gcp_credentials():
-    with patch("google.auth.default", return_value=(Mock(), "test-project")), \
-         patch("google.cloud.aiplatform.initializer.global_config.project", "test-project"):
-        yield
-
-# Import app after mocking GCP credentials
 from app.server import app
 from app.utils.input_types import InputChat
 
@@ -40,6 +35,26 @@ logger = logging.getLogger(__name__)
 # Create a test client
 client = TestClient(app)
 
+@pytest.fixture(autouse=True)
+def mock_gcp_credentials():
+    with patch.dict(os.environ, {
+        "GOOGLE_APPLICATION_CREDENTIALS": "/path/to/mock/credentials.json",
+        "GCP_PROJECT_ID": "mock-project-id"
+    }):
+        yield
+
+@pytest.fixture(autouse=True)
+def mock_google_auth_default():
+    mock_credentials = Credentials()
+    mock_project = "mock-project-id"
+    
+    with patch("google.auth.default", return_value=(mock_credentials, mock_project)):
+        yield
+
+@pytest.fixture
+def mock_storage_client():
+    with patch.object(storage, "Client") as mock_client:
+        yield mock_client
 
 @pytest.fixture
 def sample_input_chat() -> InputChat:
@@ -52,7 +67,6 @@ def sample_input_chat() -> InputChat:
         messages=[HumanMessage(content="What is the meaning of life?")],
     )
 
-
 def test_redirect_root_to_docs() -> None:
     """
     Test that the root endpoint (/) redirects to the Swagger UI documentation.
@@ -60,7 +74,6 @@ def test_redirect_root_to_docs() -> None:
     response = client.get("/")
     assert response.status_code == 200
     assert "Swagger UI" in response.text
-
 
 class AsyncIterator:
     """
@@ -79,7 +92,6 @@ class AsyncIterator:
         except StopIteration:
             raise StopAsyncIteration
 
-
 @pytest.fixture
 def mock_chain() -> Any:
     """
@@ -88,9 +100,8 @@ def mock_chain() -> Any:
     with patch("app.server.chain") as mock:
         yield mock
 
-
 @pytest.mark.asyncio
-async def test_stream_chat_events(mock_chain: Any) -> None:
+async def test_stream_chat_events(mock_chain: Any, mock_storage_client: Any) -> None:
     """
     Test the stream_events endpoint to ensure it correctly handles
     streaming responses and generates the expected events.
@@ -136,3 +147,7 @@ async def test_stream_chat_events(mock_chain: Any) -> None:
     assert events[2]["event"] == "on_chat_model_stream"
     assert events[2]["data"]["content"] == "Additional response"
     assert events[3]["event"] == "end"
+
+    # Add assertions to check if GCP Storage was used correctly
+    mock_storage_client.assert_called_once()
+    # Add more specific assertions based on how your code uses GCP Storage
