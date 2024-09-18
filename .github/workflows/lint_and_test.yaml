@@ -1,0 +1,37 @@
+# Path: .github/workflows/ci/lint_and_test.yml
+
+name: Lint and Test
+
+on:
+  push:
+    paths:
+      - 'gemini/sample-apps/conversational-genai-app-template/**'
+  pull_request:
+    paths:
+      - 'gemini/sample-apps/conversational-genai-app-template/**'
+
+jobs:
+  lint-and-test:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: gemini/sample-apps/conversational-genai-app-template
+    steps:
+    - uses: actions/checkout@v3
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.10'
+    - name: Install Poetry and dependencies
+      run: |
+        pip install poetry==1.8.3 --user
+        python -m poetry install
+    - name: Lint python code
+      run: |
+        poetry run codespell
+        poetry run ruff .
+        poetry run mypy .
+        poetry run black . --check
+    - name: Run tests
+      run: |
+        poetry run pytest tests/unit
