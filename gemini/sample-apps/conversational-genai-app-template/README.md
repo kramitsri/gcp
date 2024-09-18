@@ -1,12 +1,16 @@
 # 🚀 Conversational Gen AI App Template! 🚀
 
-> **Focus on Innovation, not Infrastructure**
+> **From Prototype to Production in Minutes.**
 
-This folder is a **starter-pack** to building a Generative AI application on Google Cloud.
+| | |
+|-|-|
+| Authors | [Elia Secchi](https://github.com/eliasecchig) [Lorenzo Spataro](https://github.com/lspataroG) |
 
-It is meant to be a template repository to build your own Gen AI application.
+This repository provides a template starter pack for building a Generative AI application on Google Cloud. 
 
 We provide a comprehensive set of resources to guide you through the entire development process, from prototype to production.
+
+This is a suggested approach, and **you can adapt it to fit your specific needs and preferences**. There are multiple ways to build GenAI applications on Google Cloud, and this template serves as a starting point and example. 
 
 ## High-Level Architecture
 
@@ -68,7 +72,7 @@ This template covers all aspects of Generative AI app development, from prototyp
 
 | Description                                                                                                                                                                                                                                                                       | Visualization            |
 | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------ |
-| Streamline your deployments with Cloud Build. Enhance reliability through automated testing. The starter pack includes implementation of unit, integration and load tests and a set of terraform resources for you to setup your own Google Cloud project in a matter of minutes. | ![cicd](images/cicd.png) |
+| Streamline your deployments with Cloud Build. Enhance reliability through automated testing. The template includes implementation of unit, integration and load tests and a set of terraform resources for you to setup your own Google Cloud project in a matter of minutes. | ![cicd](images/cicd.png) |
 
 </details>
 
@@ -182,7 +186,7 @@ Contributions are welcome! See the [Contributing Guide](CONTRIBUTING.md).
 
 ## Getting Help
 
-Please use the [issues page](https://github.com/your-repo/genai-starter-pack/issues) for suggestions, feedback, or bug reports.
+Please use the [issues page](https://github.com/GoogleCloudPlatform/generative-ai/issues) for suggestions, feedback, or bug reports.
 
 ## Disclaimer
 
