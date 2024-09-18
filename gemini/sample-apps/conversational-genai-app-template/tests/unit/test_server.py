@@ -76,6 +76,11 @@ def mock_chain() -> Any:
     """
     with patch("app.server.chain") as mock:
         yield mock
+
+@pytest.fixture(autouse=True)
+def mock_chat_vertex_ai():
+    with patch("langchain_google_vertexai.chat_models.ChatVertexAI") as mock:
+        yield mock
         
 from app.server import app
 
