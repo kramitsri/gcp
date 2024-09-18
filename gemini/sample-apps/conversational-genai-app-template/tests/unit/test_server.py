@@ -18,17 +18,21 @@ logger = logging.getLogger(__name__)
 
 @pytest.fixture(autouse=True)
 def mock_gcp_credentials() -> Generator[None, None, None]:
-    with patch.dict(os.environ, {
-        "GOOGLE_APPLICATION_CREDENTIALS": "/path/to/mock/credentials.json",
-        "GCP_PROJECT_ID": "mock-project-id"
-    }):
+    with patch.dict(
+        os.environ,
+        {
+            "GOOGLE_APPLICATION_CREDENTIALS": "/path/to/mock/credentials.json",
+            "GCP_PROJECT_ID": "mock-project-id",
+        },
+    ):
         yield
+
 
 @pytest.fixture(autouse=True)
 def mock_google_auth_default() -> Generator[None, None, None]:
     mock_credentials = MagicMock(spec=Credentials)
     mock_project = "mock-project-id"
-    
+
     with patch("google.auth.default", return_value=(mock_credentials, mock_project)):
         yield
 
@@ -43,6 +47,7 @@ def sample_input_chat() -> InputChat:
         session_id="test-session",
         messages=[HumanMessage(content="What is the meaning of life?")],
     )
+
 
 class AsyncIterator:
     """
@@ -61,6 +66,7 @@ class AsyncIterator:
         except StopIteration:
             raise StopAsyncIteration
 
+
 def test_redirect_root_to_docs() -> None:
     """
     Test that the root endpoint (/) redirects to the Swagger UI documentation.
@@ -68,11 +74,12 @@ def test_redirect_root_to_docs() -> None:
     from fastapi.testclient import TestClient
 
     from app.server import app
-    
+
     client = TestClient(app)
     response = client.get("/")
     assert response.status_code == 200
     assert "Swagger UI" in response.text
+
 
 @pytest.mark.asyncio
 async def test_stream_chat_events() -> None:
@@ -81,7 +88,7 @@ async def test_stream_chat_events() -> None:
     streaming responses and generates the expected events.
     """
     from app.server import app
-    
+
     input_data = {
         "input": {
             "user_id": "test-user",
