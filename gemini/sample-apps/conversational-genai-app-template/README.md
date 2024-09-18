@@ -22,7 +22,6 @@ This template covers all aspects of Generative AI app development, from prototyp
 | Description                                                                                                                                                                                       | Visualization                            |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------- |
 | The template includes a production-ready FastAPI server with real-time chat interface, event streaming, auto-generated docs. Designed for scalability and easy integration with monitoring tools. | ![FastAPI docs](images/fastapi_docs.png) |
-| ![FastAPI docs](images/code.png)                                                                                                                                                                  |
 
 </details>
 
@@ -138,7 +137,7 @@ For full command options and usage, refer to the [Makefile](Makefile).
 
 ## Deployment
 
-**Dev Environment**
+### Dev Environment
 
 You can test deployment towards a Dev Environment using the following command:
 
@@ -149,27 +148,29 @@ gcloud run deploy conversational-app-sample --source . --project YOUR_DEV_PROJEC
 The repository includes a Terraform configuration for setup of the Dev Google Cloud project.
 See [deployment/README.md](deployment/README.md) for instructions.
 
-**Production Deployment with Terraform:**
+### Production Deployment with Terraform
 
 ![Deployment Workflow](images/deployment_workflow.png)
 
 **Quick Start:**
 
 1. Enable required APIs in the CI/CD project.
+
    ```bash
    gcloud config set project YOUR_CI_CD_PROJECT_ID
    gcloud services enable serviceusage.googleapis.com cloudresourcemanager.googleapis.com cloudbuild.googleapis.com secretmanager.googleapis.com
    ```
+
 2. Create a Git repository (GitHub, GitLab, Bitbucket).
 3. Connect to Cloud Build following [Cloud Build Repository Setup](https://cloud.google.com/build/docs/repositories#whats_next).
 4. Configure [`deployment/terraform/vars/env.tfvars`](deployment/terraform/vars/env.tfvars) with your project details.
 5. Deploy infrastructure:
 
-```bash
-cd deployment/terraform
-terraform init
-terraform apply --var-file vars/env.tfvars
-```
+   ```bash
+   cd deployment/terraform
+   terraform init
+   terraform apply --var-file vars/env.tfvars
+   ```
 
 6. Perform a commit and push to the repository to see the CI/CD pipelines in action!
 
