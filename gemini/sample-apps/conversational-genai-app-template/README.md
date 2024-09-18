@@ -31,7 +31,7 @@ This template covers all aspects of Generative AI app development, from prototyp
 
 | Description                                                                                                                                                                                                                                                                                                                                             | Visualization                                        |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------- |
-| Start with a variety of common patterns: this repository offers examples including a basic conversational chain, a production-ready RAG (Retrieval-Augmented Generation) chain developed with python, and a LangGraph agent implementation. Use them in the application by changing one line of code. See the [README](app/README.md) for more details. | ![patterns available](images/patterns_available.png) |
+| Start with a variety of common patterns: this repository offers examples including a basic conversational chain, a production-ready RAG (Retrieval-Augmented Generation) chain developed with python, and a LangGraph agent implementation. Use them in the application by changing one line of code. See the [Readme](app/README.md) for more details. | ![patterns available](images/patterns_available.png) |
 
 </details>
 
