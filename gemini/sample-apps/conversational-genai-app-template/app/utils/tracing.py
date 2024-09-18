@@ -16,7 +16,7 @@ import json
 import logging
 from typing import Any, Optional, Sequence
 
-from google.cloud import logging as gcp_logging
+from google.cloud import logging as google_cloud_logging
 from google.cloud import storage
 from opentelemetry.exporter.cloud_trace import CloudTraceSpanExporter
 from opentelemetry.sdk.trace import ReadableSpan
@@ -34,7 +34,7 @@ class CloudTraceLoggingSpanExporter(CloudTraceSpanExporter):
 
     def __init__(
         self,
-        logging_client: Optional[gcp_logging.Client] = None,
+        logging_client: Optional[google_cloud_logging.Client] = None,
         storage_client: Optional[storage.Client] = None,
         bucket_name: Optional[str] = None,
         debug: bool = False,
@@ -51,7 +51,7 @@ class CloudTraceLoggingSpanExporter(CloudTraceSpanExporter):
         """
         super().__init__(**kwargs)
         self.debug = debug
-        self.logging_client = logging_client or gcp_logging.Client(
+        self.logging_client = logging_client or google_cloud_logging.Client(
             project=self.project_id
         )
         self.logger = self.logging_client.logger(__name__)
