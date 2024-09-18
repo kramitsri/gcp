@@ -27,11 +27,6 @@ def mock_gcp_credentials():
         yield
 
 @pytest.fixture(autouse=True)
-def mock_vertexai_init():
-    with patch("vertexai.init") as mock:
-        yield mock
-
-@pytest.fixture(autouse=True)
 def mock_google_auth_default():
     mock_credentials = MagicMock(spec=Credentials)
     mock_project = "mock-project-id"
@@ -39,15 +34,6 @@ def mock_google_auth_default():
     with patch("google.auth.default", return_value=(mock_credentials, mock_project)):
         yield
 
-@pytest.fixture(autouse=True)
-def mock_storage_client():
-    with patch.object(storage, "Client") as mock_client:
-        yield mock_client
-
-@pytest.fixture(autouse=True)
-def mock_chat_vertex_ai():
-    with patch("langchain_google_vertexai.chat_models.ChatVertexAI") as mock:
-        yield mock
 
 @pytest.fixture
 def sample_input_chat() -> InputChat:
