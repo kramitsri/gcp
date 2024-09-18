@@ -53,12 +53,12 @@ def mock_google_auth_default():
     with patch("google.auth.default", return_value=(mock_credentials, mock_project)):
         yield
 
-@pytest.fixture
+@pytest.fixture(autouse=True)
 def mock_storage_client():
     with patch.object(storage, "Client") as mock_client:
         yield mock_client
 
-@pytest.fixture
+@pytest.fixture(autouse=True)
 def sample_input_chat() -> InputChat:
     """
     Fixture to create a sample input chat for testing.
