@@ -25,7 +25,7 @@ jobs:
     - name: Install Poetry and dependencies
       run: |
         pip install poetry==1.8.3 --user
-        python -m poetry install
+        python -m poetry install --with lint, test
     - name: Lint python code
       run: |
         poetry run codespell
