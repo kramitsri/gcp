@@ -25,9 +25,6 @@ from google.cloud import storage
 from httpx import AsyncClient
 from langchain_core.messages import HumanMessage
 
-from app.server import app
-from app.utils.input_types import InputChat
-
 # Set up logging
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
@@ -66,6 +63,9 @@ def sample_input_chat() -> InputChat:
         session_id="test-session",
         messages=[HumanMessage(content="What is the meaning of life?")],
     )
+
+from app.server import app
+from app.utils.input_types import InputChat
 
 def test_redirect_root_to_docs() -> None:
     """
