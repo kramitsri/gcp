@@ -14,6 +14,7 @@
 
 from unittest.mock import Mock, patch
 
+import os
 import pytest
 from google.cloud import logging as google_cloud_logging
 from google.cloud import storage
@@ -30,6 +31,15 @@ def mock_logging_client() -> Mock:
 @pytest.fixture
 def mock_storage_client() -> Mock:
     return Mock(spec=storage.Client)
+
+
+@pytest.fixture(autouse=True)
+def mock_gcp_credentials():
+    with patch.dict(os.environ, {
+        "GOOGLE_APPLICATION_CREDENTIALS": "/path/to/mock/credentials.json",
+        "GCP_PROJECT_ID": "mock-project-id"
+    }):
+        yield
 
 
 @pytest.fixture
