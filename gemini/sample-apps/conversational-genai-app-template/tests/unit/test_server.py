@@ -16,7 +16,6 @@ from app.utils.input_types import InputChat
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
-# Keep the fixtures and helper classes
 
 @pytest.fixture(autouse=True)
 def mock_gcp_credentials():
@@ -62,8 +61,6 @@ class AsyncIterator:
             return next(self.iter)
         except StopIteration:
             raise StopAsyncIteration
-
-# Now, let's modify the test functions
 
 def test_redirect_root_to_docs() -> None:
     """
