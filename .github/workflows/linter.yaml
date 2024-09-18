@@ -47,20 +47,12 @@ jobs:
       ################################
       # Run Linter against code base #
       ################################
-
-      - name: Lint Conversational Gen AI App Template
-        if: contains(github.event.pull_request.changed_files, 'gemini/sample-apps/conversational-genai-app-template/')
-        run: |
-          cd gemini/sample-apps/conversational-genai-app-template
-          pip install poetry
-          poetry run ruff check .
-          
       - name: Lint Code Base
         uses: super-linter/super-linter/slim@v7
         env:
           DEFAULT_BRANCH: main
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          FILTER_REGEX_EXCLUDE: 'gemini/sample-apps/finance-advisor-spanner/.*\.sql|gemini/sample-apps/conversational-genai-app-template/.*\.py'
+          FILTER_REGEX_EXCLUDE: 'gemini/sample-apps/finance-advisor-spanner/.*\.sql'
           JAVASCRIPT_DEFAULT_STYLE: prettier
           LOG_LEVEL: WARN
           SHELLCHECK_OPTS: -e SC1091 -e 2086
@@ -68,5 +60,3 @@ jobs:
           VALIDATE_PYTHON_ISORT: false
           VALIDATE_TYPESCRIPT_STANDARD: false # super-linter/super-linter#4445
           VALIDATE_CHECKOV: false
-      
-
