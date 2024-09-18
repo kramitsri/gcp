@@ -341,6 +341,7 @@ etf
 eur
 evals
 faiss
+fastapi
 fect
 fewshot
 ffi
@@ -382,6 +383,7 @@ gsutil
 gtk
 guanciale
 gunicorn
+hadolint
 hashtag
 hashtags
 hdlr
@@ -428,6 +430,7 @@ lexer
 linalg
 linecolor
 linted
+linting
 llm
 llms
 logprobs
@@ -553,6 +556,7 @@ supima
 sxs
 tagline
 tencel
+terraform
 termcolor
 tfhub
 tfidf
@@ -567,6 +571,7 @@ toset
 tqdm
 traceloop
 tritan
+tsv
 ubuntu
 unigram
 unrtf
@@ -575,6 +580,7 @@ urandom
 username
 usernames
 uvb
+uvicorn
 vectordb
 vertexai
 vesselin
