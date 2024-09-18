@@ -17,12 +17,12 @@ logger = logging.getLogger(__name__)
 
 
 @pytest.fixture(autouse=True)
-def mock_gcp_credentials() -> Generator[None, None, None]:
+def mock_google_cloud_credentials() -> Generator[None, None, None]:
     with patch.dict(
         os.environ,
         {
             "GOOGLE_APPLICATION_CREDENTIALS": "/path/to/mock/credentials.json",
-            "GCP_PROJECT_ID": "mock-project-id",
+            "GOOGLE_CLOUD_PROJECT_ID": "mock-project-id",
         },
     ):
         yield
