@@ -15,7 +15,7 @@
 from unittest.mock import Mock, patch
 
 import pytest
-from google.cloud import logging as gcp_logging
+from google.cloud import logging as google_cloud_logging
 from google.cloud import storage
 from opentelemetry.sdk.trace import ReadableSpan
 
@@ -24,7 +24,7 @@ from app.utils.tracing import CloudTraceLoggingSpanExporter
 
 @pytest.fixture
 def mock_logging_client() -> Mock:
-    return Mock(spec=gcp_logging.Client)
+    return Mock(spec=google_cloud_logging.Client)
 
 
 @pytest.fixture

@@ -26,7 +26,7 @@ from app.utils.output_types import EndEvent, Event
 from app.utils.tracing import CloudTraceLoggingSpanExporter
 from fastapi import FastAPI
 from fastapi.responses import RedirectResponse, StreamingResponse
-from google.cloud import logging as gcp_logging
+from google.cloud import logging as google_cloud_logging
 from traceloop.sdk import Instruments, Traceloop
 
 # Or choose one of the following pattern chains to test by uncommenting it:
@@ -48,7 +48,7 @@ SUPPORTED_EVENTS = [
 
 # Initialize FastAPI app and logging
 app = FastAPI()
-logging_client = gcp_logging.Client()
+logging_client = google_cloud_logging.Client()
 logger = logging_client.logger(__name__)
 
 # Initialize Traceloop
