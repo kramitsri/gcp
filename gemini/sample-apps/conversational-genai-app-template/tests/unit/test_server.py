@@ -25,12 +25,12 @@ from google.cloud import storage
 from httpx import AsyncClient
 from langchain_core.messages import HumanMessage
 
+from app.utils.input_types import InputChat
+
 # Set up logging
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
-# Create a test client
-client = TestClient(app)
 
 @pytest.fixture(autouse=True)
 def mock_gcp_credentials():
@@ -65,7 +65,10 @@ def sample_input_chat() -> InputChat:
     )
 
 from app.server import app
-from app.utils.input_types import InputChat
+
+# Create a test client
+client = TestClient(app)
+
 
 def test_redirect_root_to_docs() -> None:
     """
