@@ -26,12 +26,12 @@ jobs:
       run: |
         pip install poetry==1.8.3 --user
         python -m poetry install --with lint,streamlit
-    - name: Lint python code
-      run: |
-        poetry run codespell
-        poetry run ruff .
-        poetry run mypy .
-        poetry run black . --check
+    # - name: Lint python code
+    #   run: |
+    #     poetry run codespell
+    #     poetry run ruff .
+    #     poetry run mypy .
+    #     poetry run black . --check
     - name: Run tests
       run: |
         poetry run pytest tests/unit

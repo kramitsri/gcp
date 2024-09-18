@@ -15,13 +15,20 @@
 import json
 import logging
 from typing import Any
-from unittest.mock import patch
+from unittest.mock import patch, Mock
 
 import pytest
 from fastapi.testclient import TestClient
 from httpx import AsyncClient
 from langchain_core.messages import HumanMessage
 
+# Mock GCP credentials and project
+@pytest.fixture(autouse=True)
+def mock_gcp_credentials():
+    with patch("google.auth.default", return_value=(Mock(), "test-project")):
+        yield
+
+# Import app after mocking GCP credentials
 from app.server import app
 from app.utils.input_types import InputChat
 
