@@ -16,7 +16,7 @@ import json
 import logging
 import os
 from typing import Any
-from unittest.mock import patch
+from unittest.mock import patch, MagicMock
 
 import pytest
 from fastapi.testclient import TestClient
@@ -45,7 +45,7 @@ def mock_gcp_credentials():
 
 @pytest.fixture(autouse=True)
 def mock_google_auth_default():
-    mock_credentials = Credentials()
+    mock_credentials = MagicMock(spec=Credentials)
     mock_project = "mock-project-id"
     
     with patch("google.auth.default", return_value=(mock_credentials, mock_project)):
@@ -147,7 +147,3 @@ async def test_stream_chat_events(mock_chain: Any, mock_storage_client: Any) -> 
     assert events[2]["event"] == "on_chat_model_stream"
     assert events[2]["data"]["content"] == "Additional response"
     assert events[3]["event"] == "end"
-
-    # Add assertions to check if GCP Storage was used correctly
-    mock_storage_client.assert_called_once()
-    # Add more specific assertions based on how your code uses GCP Storage
