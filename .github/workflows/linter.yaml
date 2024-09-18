@@ -47,6 +47,14 @@ jobs:
       ################################
       # Run Linter against code base #
       ################################
+
+      - name: Lint Conversational Gen AI App Template
+        if: contains(github.event.pull_request.changed_files, 'gemini/sample-apps/conversational-genai-app-template/')
+        run: |
+          cd gemini/sample-apps/conversational-genai-app-template
+          pip install poetry
+          poetry run ruff check .
+          
       - name: Lint Code Base
         uses: super-linter/super-linter/slim@v7
         env:
@@ -61,9 +69,4 @@ jobs:
           VALIDATE_TYPESCRIPT_STANDARD: false # super-linter/super-linter#4445
           VALIDATE_CHECKOV: false
       
-      - name: Lint Conversational GenAI App Template
-        if: contains(github.event.pull_request.changed_files, 'gemini/sample-apps/conversational-genai-app-template/')
-        run: |
-          cd gemini/sample-apps/conversational-genai-app-template
-          pip install poetry
-          poetry run ruff check .
+
