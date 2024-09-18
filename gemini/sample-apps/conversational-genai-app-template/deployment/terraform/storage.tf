@@ -1,4 +1,5 @@
 terraform {
+  required_version = ">= 1.0.0"
   required_providers {
     google = {
       source  = "hashicorp/google"
@@ -32,5 +33,5 @@ resource "google_storage_bucket" "logs_data_bucket" {
   uniform_bucket_level_access = true
   force_destroy               = true
 
-  depends_on                  = [resource.google_project_service.cicd_services, resource.google_project_service.shared_services]
+  depends_on = [resource.google_project_service.cicd_services, resource.google_project_service.shared_services]
 }
