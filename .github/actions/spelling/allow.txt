@@ -119,6 +119,7 @@ Khanh
 Knopf
 Kubeflow
 Kudrow
+LangGraph
 LCEL
 LLMs
 LOOKBACK
@@ -220,6 +221,7 @@ Testables
 Tetsuo
 Tianli
 Topolino
+Traceloop
 Trapp
 Tribbiani
 Tricyle
@@ -296,12 +298,14 @@ caxis
 cfbundle
 chatbots
 claude
+cicd
 clickable
 cmap
 codebase
 codebases
 codelab
 codelabs
+codespell
 colab
 coldline
 coloraxis
@@ -393,6 +397,7 @@ gsutil
 gtk
 guanciale
 gunicorn
+hadolint
 hashtag
 hashtags
 hdlr
@@ -441,6 +446,7 @@ lexer
 linalg
 linecolor
 linted
+linting
 llm
 llms
 logprobs
@@ -569,10 +575,12 @@ supima
 sxs
 tagline
 tencel
+terraform
 termcolor
 textno
 tfhub
 tfidf
+tfvars
 tgz
 thelook
 tiktoken
@@ -580,8 +588,11 @@ timechart
 titlebar
 tobytes
 toself
+toset
 tqdm
+traceloop
 tritan
+tsv
 ubuntu
 undst
 unigram
@@ -592,6 +603,7 @@ usecases
 username
 usernames
 uvb
+uvicorn
 vectordb
 vertexai
 vesselin
