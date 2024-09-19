@@ -19,8 +19,6 @@ from typing import AsyncGenerator
 import uuid
 
 # ruff: noqa: I001
-## Import the chain to be used
-from app.chain import chain
 from app.utils.input_types import Feedback, Input, InputChat, default_serialization
 from app.utils.output_types import EndEvent, Event
 from app.utils.tracing import CloudTraceLoggingSpanExporter
@@ -29,6 +27,8 @@ from fastapi.responses import RedirectResponse, StreamingResponse
 from google.cloud import logging as google_cloud_logging
 from traceloop.sdk import Instruments, Traceloop
 
+## Import the chain to be used
+from app.chain import chain
 # Or choose one of the following pattern chains to test by uncommenting it:
 
 # Custom RAG QA
