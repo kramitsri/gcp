@@ -107,6 +107,7 @@ Jang
 Jedi
 Joji
 KNN
+KPIs
 Kaelen
 Kaggle
 Kamradt
@@ -230,6 +231,7 @@ Unimicron
 Upserting
 Urs
 Uszkoreit
+VAPO
 VFT
 VMs
 VOS
@@ -250,6 +252,7 @@ Womens
 XXE
 Yuzuru
 Zijin
+Zom
 Zscaler
 Zuercher
 aadd
@@ -263,6 +266,7 @@ afrom
 agentic
 ainit
 ainvoke
+aip
 airlume
 alloydb
 antiword
@@ -271,8 +275,10 @@ apredict
 aquery
 arXiv
 aretrieve
+argmax
 arun
 astype
+autoflake
 autogen
 automl
 autoptr
@@ -310,6 +316,7 @@ colwidth
 constexpr
 corpuses
 csa
+cse
 cupertino
 dask
 dataframe
@@ -324,15 +331,19 @@ deskmates
 dino
 diy
 docai
+docstore
 dpi
 draig
 drinkware
+dropdown
 dropna
 dsl
 dtypes
 dwmapi
 ecommerce
+ekg
 elous
+emb
 embs
 emojis
 ename
@@ -347,11 +358,14 @@ fewshot
 ffi
 figsize
 fillmode
+firestore
 flac
+fontdict
 forno
 freedraw
 freopen
 fromarray
+fromiter
 fts
 fulltext
 funtion
@@ -400,6 +414,7 @@ idk
 idks
 idxs
 iloc
+imageno
 imdb
 imshow
 iostream
@@ -411,6 +426,7 @@ itables
 iterrows
 jegadesh
 jetbrains
+jsonify
 jupyter
 kaggle
 kenleejr
@@ -448,6 +464,7 @@ metadatas
 mgrs
 miranda
 morty
+moviepy
 mpn
 mrr
 nbconvert
@@ -471,6 +488,7 @@ onesies
 osx
 owlbot
 oxml
+pagemap
 paleo
 pancetta
 pantarba
@@ -502,6 +520,7 @@ projectid
 protobuf
 pstotext
 pubspec
+putdata
 pvc
 pyautogen
 pybind
@@ -558,6 +577,7 @@ tagline
 tencel
 terraform
 termcolor
+textno
 tfhub
 tfidf
 tfvars
@@ -566,6 +586,7 @@ thelook
 tiktoken
 timechart
 titlebar
+tobytes
 toself
 toset
 tqdm
@@ -573,10 +594,12 @@ traceloop
 tritan
 tsv
 ubuntu
+undst
 unigram
 unrtf
 upsell
 urandom
+usecases
 username
 usernames
 uvb
